@@ -11,7 +11,7 @@ const questions = [
     },
     {
         name: 'color',
-        message: 'Enter a color keyword or a 6 digit hexadecimal number:'.cyan,
+        message: 'Enter a color keyword or a 6 digit hexadecimal number for the text:'.cyan,
         validate: validateColor
     },
     {
@@ -19,6 +19,11 @@ const questions = [
         type: 'list',
         choices: ['Circle', 'Triangle', 'Square'],
         message: 'Please select a shape'.cyan
+    },
+    {
+        name: 'shapeColor',
+        message: 'Enter a color keyword or a 6 digit hexadecimal number for the shape:'.cyan,
+        validate: validateColor
     }
 ];
 
