@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const colors = require('colors');
 const fs = require('fs');
-const generateSVG = require('./utils/generateSVG');
+const generateSVG = require('./lib/generateSVG');
 const validColors = require('./colors.json');
 
 const questions = [
