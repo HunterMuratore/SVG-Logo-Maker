@@ -53,13 +53,13 @@ function validateText(input) {
 function validateColor(input) {
     if (validColors.includes(input.toLowerCase())) {
         return true;
-    } else if (input.length == 6 && /^[0-9A-Fa-f]+$/.test(input)) {
+    } else if (input.length == 7 && /^#[0-9A-Fa-f]+$/.test(input)) {
         return true;
     } else if (input.toLowerCase() === 'random') {
         return true;
     }
     
-    return 'Must enter a color keyword (i.e. Red) or a valid 6 digit hexadecimal number (i.e. #a1b2c3) - try again'.brightRed;
+    return 'Must enter a color keyword (i.e. lightseagreen) or a valid 6 digit hexadecimal number (i.e. #deb887) - try again'.brightRed;
 }
 
 init();
