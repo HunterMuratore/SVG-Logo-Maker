@@ -30,12 +30,12 @@ const questions = [
 
 function init() {
     inquirer.prompt(questions).then((answers) => {
-        writeToFile(answers.text, generateSVG(answers));
+        writeToFile(generateSVG(answers));
     });
 }
 
-function writeToFile(fileName, data) {
-    fs.writeFile(`./${fileName}_logo.svg`, data, (err) => {
+function writeToFile(data) {
+    fs.writeFile(`./logo.svg`, data, (err) => {
         if (err) throw err;
     
         console.log('Logo created successfully!');
