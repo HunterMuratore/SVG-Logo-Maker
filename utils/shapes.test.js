@@ -1,4 +1,4 @@
-const generateSVG = require('./generateSVG');
+const generateSVG = require('./shapes');
 
 describe('Generate SVG Tests', () => {
     it('Should return a string', () => {
