@@ -2,7 +2,6 @@ const inquirer = require('inquirer');
 const colors = require('colors');
 const fs = require('fs');
 const {Circle, Square, Triangle} = require('./utils/shapes');
-const generateSVG = require('./utils/shapes');
 const validColors = require('./colors.json');
 
 const questions = [
@@ -31,7 +30,11 @@ const questions = [
 
 function init() {
     inquirer.prompt(questions).then((answers) => {
-        writeToFile(generateSVG(answers));
+        // writeToFile(generateSVG(answers));
+        if (answers.shape === 'Circle') {
+            const circle = new Circle(answers);
+            circle.checkColor();
+        }
     });
 }
 

@@ -1,44 +1,38 @@
 const validColors = require('../colors.json');
 
 class Shape {
-    constructor(text, textColor, shapeColor) {
-        this.text = text;
-        this.textColor = textColor;
-        this.shapeColor = shapeColor;
+    constructor(color) {
+        this.color = color;
     }
 
-    checkColors() {
+    checkColor() {
         if (this.color.toLowerCase() === 'random') {
             this.color = validColors[Math.floor(Math.random() * validColors.length)];
-        }
-    
-        if (this.shapeColor.toLowerCase() === 'random') {
-            this.shapeColor = validColors[Math.floor(Math.random() * validColors.length)];
         }
     }
 }
 
 class Circle extends Shape {
-    constructor(shape) {
-        super();
+    constructor(answer) {
+        super(answer.shapeColor);
 
-        this.shape = shape;
+        this.answer.shape = 'circle';
     }
 }
 
 class Square extends Shape {
-    constructor(shape) {
-        super();
+    constructor(color) {
+        super(color);
         
-        this.shape = shape;
+        this.shape = 'square';
     }
 }
 
 class Triangle extends Shape {
-    constructor(shape) {
-        super();
+    constructor(color) {
+        super(color);
         
-        this.shape = shape;
+        this.shape = 'triangle';
     }
 }
 
