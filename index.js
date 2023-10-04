@@ -1,8 +1,7 @@
 const inquirer = require('inquirer');
 const colors = require('colors');
 const fs = require('fs');
-const generateSVG = require('./lib/generateSVG');
-const validColors = require('./colors.json');
+const {Circle, Square, Triangle} = require('./utils/shapes');
 
 const questions = [
     {
@@ -11,8 +10,8 @@ const questions = [
         validate: validateText
     },
     {
-        name: 'color',
-        message: 'Enter a color keyword or a 6 digit hexadecimal number for the text (or try a \'random\' color):'.cyan,
+        name: 'textColor',
+        message: 'Enter a color keyword or a 6 digit hexadecimal number for the text:'.cyan,
         validate: validateColor
     },
     {
@@ -23,7 +22,7 @@ const questions = [
     },
     {
         name: 'shapeColor',
-        message: 'Enter a color keyword or a 6 digit hexadecimal number for the shape (or try a \'random\' color):'.cyan,
+        message: 'Enter a color keyword or a 6 digit hexadecimal number for the shape:'.cyan,
         validate: validateColor
     }
 ];
@@ -60,6 +59,17 @@ function validateColor(input) {
     }
     
     return 'Must enter a color keyword (i.e. lightseagreen) or a valid 6 digit hexadecimal number (i.e. #deb887) - try again'.brightRed;
+}
+
+function generateSVG(answers) {
+    const shape = answers.shape === 'Triangle' ? new Triangle() : answers.shape === 'Circle' ? new Circle() : new Square();
+
+    shape.setColor(answers.shapeColor);
+
+    return `<svg version="1.1" width="300" height="200">
+${shape.render()}
+<text x="150" y="${answers.shape === 'Triangle' ? '150' : '120'}" font-size="50" text-anchor="middle" fill="${answers.textColor}">${answers.text}</text>
+</svg>`;
 }
 
 init();
