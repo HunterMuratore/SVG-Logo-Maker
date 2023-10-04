@@ -2,7 +2,6 @@ const inquirer = require('inquirer');
 const colors = require('colors');
 const fs = require('fs');
 const {Circle, Square, Triangle} = require('./utils/shapes');
-const validColors = require('./colors.json');
 
 const questions = [
     {
@@ -11,8 +10,8 @@ const questions = [
         validate: validateText
     },
     {
-        name: 'color',
-        message: 'Enter a color keyword or a 6 digit hexadecimal number for the text (or try a \'random\' color):'.cyan,
+        name: 'textColor',
+        message: 'Enter a color keyword or a 6 digit hexadecimal number for the text:'.cyan,
         validate: validateColor
     },
     {
@@ -23,18 +22,14 @@ const questions = [
     },
     {
         name: 'shapeColor',
-        message: 'Enter a color keyword or a 6 digit hexadecimal number for the shape (or try a \'random\' color):'.cyan,
+        message: 'Enter a color keyword or a 6 digit hexadecimal number for the shape:'.cyan,
         validate: validateColor
     }
 ];
 
 function init() {
     inquirer.prompt(questions).then((answers) => {
-        // writeToFile(generateSVG(answers));
-        if (answers.shape === 'Circle') {
-            const circle = new Circle(answers);
-            circle.checkColor();
-        }
+        writeToFile(generateSVG(answers));
     });
 }
 
@@ -67,22 +62,14 @@ function validateColor(input) {
 }
 
 function generateSVG(answers) {
-    if (answers.shape === 'Circle') {
-        return `<svg version="1.1" width="300" height="200">
-<circle cx="150" cy="100" r="100" fill="${answers.shapeColor}"/>
-<text x="150" y="120" font-size="50" text-anchor="middle" fill="${answers.color}">${answers.text}</text>
+    const shape = answers.shape === 'Triangle' ? new Triangle() : answers.shape === 'Circle' ? new Circle() : new Square();
+
+    shape.setColor(answers.shapeColor);
+
+    return `<svg version="1.1" width="300" height="200">
+${shape.render()}
+<text x="150" y="${answers.shape === 'Triangle' ? '150' : '120'}" font-size="50" text-anchor="middle" fill="${answers.textColor}">${answers.text}</text>
 </svg>`;
-    } else if (answers.shape === 'Square') {
-        return `<svg version="1.1" width="300" height="200">
-<rect width="300" height="200" fill="${answers.shapeColor}"/>
-<text x="150" y="120" font-size="50" text-anchor="middle" fill="${answers.color}">${answers.text}</text>
-</svg>`;
-    } else if (answers.shape === 'Triangle') {
-        return `<svg version="1.1" width="300" height="200">
-<polygon points="150,20 30,180 270,180" fill="${answers.shapeColor}"/>
-<text x="150" y="150" font-size="50" text-anchor="middle" fill="${answers.color}">${answers.text}</text>
-</svg>`;
-    }
 }
 
 init();
