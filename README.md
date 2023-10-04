@@ -39,7 +39,7 @@ This project is under the license of MIT.
 
 ## Tests
 
-run `npm test`
+To run the tests for this app run `npm test`
 
 ## Questions
 
