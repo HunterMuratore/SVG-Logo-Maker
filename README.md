@@ -31,7 +31,8 @@ This app takes in user input and generates a simple logo in an svg file for them
 
 This app can be used to make a simplistic, clean-looking logo for any of your projects.
 
-![SVG Logo Maker Demo](video)
+[![SVG Logo Maker Demo](https://img.youtube.com/vi/duFjlTn3hBc/maxresdefault.jpg)](https://youtu.be/watch?v=duFjlTn3hBc)
+>Click the image to be taken to this app's demo video on youtube
 
 ## License
 
